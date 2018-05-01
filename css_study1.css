@@ -1,0 +1,186 @@
+h1 {text-align:center;}
+h2 {color:red;}
+h3 {text-shadow:3px -4px #dddddd;}
+body 
+{background-color:rgb(123,155,200);
+background-image:url('robot.jpg');
+background-repeat:repeat-x;
+background-position:top}
+p.textalign
+{
+	text-align:justify;
+	color:#111111
+}
+p.spacing
+{
+	letter-spacing:-3px;
+	line-height:250%;
+	word-spacing:20px;/*设置一个空格占有的横向大小*/
+}
+p.fontlight{font-weight:lighter;}
+p.fontbold{font-weight:bold;}
+p.thicker{font-weight:1000;}
+
+div.rtl
+{
+	direction:rtl
+}
+
+ul.square
+{
+	list-style:square url("icon.jpg");
+}
+
+table
+{
+	border-collapse:collapse;
+	width:100%;
+	color:yellow;
+}
+
+table, th, td
+{
+border: 1px solid red;
+}
+
+th
+{
+	height:90px;
+}
+
+td
+{
+	text-align:center;
+}
+
+p.border
+{
+	border-width="2px";
+	border-style:inset;
+	border-color:blue;
+	border-style:dotted solid;
+}
+
+p.short
+{
+	border:3px dashed red;
+}
+
+#flex
+{
+	width:400px;
+	height:200px;
+	border:2px solid #ccffcc;
+	display:flex;
+	justify-content:space-between;}
+
+
+#flex div
+{width:70px;
+height:90px;}
+
+#zindex
+{
+position:absolute;
+top:100px;
+z-index:-1;
+clip:rect(0px,40px,30px,0px);
+}
+
+div.overflowscroll
+{
+	background-color:white;
+	width:100px;
+	height:100px;
+	overflow:scroll;
+	cursor:crosshair;
+}
+
+div.overflowhidden
+{
+	background-color:white;
+	width:100px;
+	height:100px;
+	overflow:hidden;
+	cursor:help;
+}
+
+div.center
+{
+	margin: auto;
+	width: 50%;
+	border: 2px solid #888888;
+	padding: 4px;
+	text-align: center;
+}
+
+*:lang(z)
+{
+	background:yellow;
+}
+
+input.size[type="text"]:enabled{
+	background:#44ff44;
+}
+
+input.size:checked{
+	height: 30px;
+	width: 30px;
+}
+
+.dropdown{
+	position:relative;
+	display:inline-block；
+}
+
+.dropdown-content{
+	display:none;
+	position:absolute;
+	background-color:#ffaaaa;
+	width:200px;
+	border-radius:5px;
+}
+
+.dropdown:hover{
+	cursor:pointer;
+}
+
+.dropdown:hover .dropdown-content  {
+	display:block;
+}
+
+div.transition{
+	width:100px;
+	height: 20px;
+	background:green;
+	transition-property: height,width,opacity,background;
+	opacity: 0.3;
+	transition-duration:2s;
+	
+}
+
+div.transition:hover{
+	width:200px;
+    height:100px;
+	background:red;
+	opacity:1;
+}
+
+#icon
+{
+	left:0px;
+	width:80px;
+	height:30px;
+	background:url('icons.png') -302px 0px;
+}
+
+#icon:hover{
+	background:url('icons.png') -302px -146px;
+}
+	
+
+
+
+
+
+
