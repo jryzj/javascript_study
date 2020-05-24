@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "D:\\ZYK\\arduino-nightly\\tools\\**",
+                "D:\\ZYK\\arduino-nightly\\hardware\\arduino\\avr\\**"
+            ],
+            "forcedInclude": [
+                "D:\\ZYK\\arduino-nightly\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}

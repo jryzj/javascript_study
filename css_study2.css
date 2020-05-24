@@ -1,0 +1,190 @@
+div.rotate
+{
+	width:100px;
+	height:100px;
+	background-color:red;
+	border:1px solid green;
+	transform:rotate(30deg);
+	border-radius:30px 15px 20px/40px;
+	box-shadow:10px 10px 5px 4px #aa8888;
+	margin:30px;
+}
+
+div.circle
+{
+	width:100px;
+	height:150px;
+	background-color:red;
+	border:1px solid green;
+	border-radius:50%;
+	box-shadow:10px 10px 5px 4px #aa8888;
+	text-align:center;
+	
+	display: box;
+	box-orient: horizontal;
+	box-pack: center;
+	box-align: center;
+	
+	display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+
+div.background2images
+{
+	width:200px;
+	height:150px;
+	background-image: url(icon.jpg), url(2.png);
+	padding:20px;
+	background-repeat:no-repeat;
+	background-clip: content-box;	
+}
+
+.gradient-color
+{
+	width:400px;
+	height:100px;
+	background:linear-gradient(to bottom right, red, blue, yellow);
+}
+
+.gradient-color-repeat
+{
+	width:400px;
+	height:100px;
+	background:repeating-linear-gradient(to bottom right, red, blue 12%, yellow 25%);
+}
+
+.gradient-transparent
+{
+	width:100px;
+	height:100px;
+	background:linear-gradient(to bottom right, rgba(244,100,100,0), rgba(244,100,100,1));
+}
+
+.gradient-radial
+{
+	width:100px;
+	height:100px;
+	background: radial-gradient(red,green,blue);
+}
+
+.text-shadow
+{
+	text-shadow: 5px 5px 10px #888888;
+}
+
+.box-shadow
+{
+	box-shadow: 10px 10px 7px gray, 15px 15px 10px #444;
+	width:200px;
+	height:100px;
+	background-color:green;
+	border: 1px solid black;
+}
+
+div.textoverflow
+{
+	white-space:nowrap;
+	width:100px;
+	border:1px solid green;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+div.transition
+{
+	width:100px;
+	height:100px;
+	background:#aaddaa;
+	line-height:100px;
+	text-align:center;
+	transition: width 2s, height 2s, transform 2s;
+}
+
+div.transition:hover
+{
+	width:150px;
+	height:150px;
+	transform: rotate(180deg);
+}
+
+div.anim
+{
+	width:100px;
+	height:100px;
+	background:red;
+	position:relative;
+	animation:myanim 5s infinite alternate; 
+	animation-delay:2s;
+}
+
+@keyframes myanim
+{
+	0% {background:red; left:0px; top:0px;}
+	25% {background:yellow; left:150px; top:0px;}
+	50% {background:blue; left:150px; top:150px;}
+	75% {background:green; left:0px; top:150px;}
+	100% {background:red; left:0px; top:0px;}	
+}
+
+div.column
+{
+	column-count:4;
+	column-gap:20px;
+	column-width:100px;
+	column-rule-style:dashed;
+	column-rule-color:#3333bb;
+	column-rule-width:4px;	
+	resize:both;
+	overflow:auto;
+	outline:2px solid #3344dd;
+	outline-offset:10px;
+}
+
+img.filter
+{
+	width:400px;
+	filter:grayscale(100%);
+}
+
+.simplebtn
+{
+	background-color:#4caf50;
+	border:none;
+	color:white;
+	padding:8px;
+	text-transform:capitalize;
+	text-align:center;
+}
+
+.roundbtn
+{
+	radius:3px;
+}
+
+.animbtn
+{
+	width:150px;
+	background-color:green;
+	color:white;
+	font-size:20px;
+	border:none;
+	padding:15px;
+	border-radius:10px;
+	transition:0.5s;
+}
+
+.animbtn:hover:after{
+	content:"=>";
+	padding-right:5px;
+     transition:0.5s;
+}
+
+
+
+
+
+
+
+

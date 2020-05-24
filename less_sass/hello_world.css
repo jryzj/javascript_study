@@ -1,0 +1,15 @@
+.container {
+  height: 50px;
+  color: green;
+  background: #f00;
+}
+h2 {
+  font-style: italic;
+}
+h2 {
+  background-color: red;
+}
+.style,
+h2 {
+  background: green;
+}

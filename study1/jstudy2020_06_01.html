@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .ipt {
+            width: 200px;
+            margin: auto;
+            margin-top: 10px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid skyblue;
+            text-align: center;
+        }
+
+        .ipt-lvl {
+            width: 20px;
+        }
+
+        .ipt-label {
+            margin-left: 20px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .btn-pre {
+            margin-left: 20px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .map {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .obj {
+            margin: 5px;
+            padding: 5px;
+            background-color: rgb(100, 178, 192);
+            border: 2px solid white;
+            border-radius: 5px;
+        }
+
+        .fl {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div><span class='ipt-label'>TargetName:</span>
+            <input class="ipt ipt-tgt">
+            <span class='ipt-label'>Level:</span>
+            <input class="ipt ipt-lvl" type="text" 
+                value="2">
+            <button class='btn-pre'>
+                <</button> </div> <div class="map">
+                    <!-- <div class="obj fl">ddd</div> -->
+                    <!-- <div class="obj fl">ddd</div> -->
+        </div>
+    </div>
+    <script>
+        function parseObj(objStr, root) {
+            let objName = objStr.split('.');
+            for (let len = objName.length, i = 0; i < len; i++) {
+                if (root) {
+                    root = root[objName[i]];
+                } else {
+                    return undefined;
+                }
+            }
+            return root;
+        }
+
+        function surveyObj(root, level) {
+            let obj, len, attr;
+            if (level-- > 0) {
+                // let attr = Object.getOwnPropertyNames(root);
+                switch (typeof root) {
+                    case 'string':
+                    case 'number':
+                    case 'boolean':
+                    case 'undefined':
+                        obj = root;
+                        break;
+                    case 'function':
+                        attr = Object.getOwnPropertyNames(root);
+                        len = attr.length;
+                        obj = {};
+                        obj[typeTag] = typeof root;
+                        for (let i = 0; i < len; i++) {
+                            obj[attr[i]] = root[attr[i]];
+                        }
+                        break;
+                    case 'object': {
+                        switch (root) {
+                            case null:
+                                obj = root;
+                                break;
+                            default:
+                                attr = Object.getOwnPropertyNames(root);
+                                obj = {};
+                                obj[typeTag] = 'object';
+                                len = attr.length;
+                                if (len == 0) {
+                                    obj.value = root;
+                                } else {
+                                    for (let i = 0; i < len; i++) {
+                                        if (propertySum < maxNum) {
+                                            propertySum++;
+                                            // console.log({
+                                            //     propertySum
+                                            // });
+                                            obj[attr[i]] = surveyObj(root[attr[i]], level);
+                                        }
+                                    }
+                                }
+                        }
+                        break;
+                    }
+                }
+            } else {
+                obj = '[.....]';
+            }
+            return obj;
+        }
+
+        let propertySum = 0;
+        let maxNum = 100000;
+        let maxLevel = 3;
+        let typeTag = 'azsx';
+
+        function appDiv(container, content) {
+            let tDiv = document.createElement('div');
+            tDiv.classList.toggle('obj');
+            tDiv.classList.toggle('fl');
+            tDiv.innerHTML = content + '<br>';
+            container.appendChild(tDiv);
+            return tDiv;
+        }
+
+        function showAllAttr(container, objJson, rootStr) {
+            switch (typeof objJson) {
+                case 'string':
+                    if (objJson == '') {
+                        objJson = '""';
+                    }
+                case 'number':
+                case 'boolean':
+                case 'undefined':
+                    appDiv(container, rootStr + ' : ' + objJson);
+                    break;
+                case 'object':
+                    switch (objJson) {
+                        case null:
+                            appDiv(container, rootStr + ' : ' + objJson);
+                            break;
+                        default:
+                            let attr = Object.keys(objJson);
+                            let tDiv;
+                            if (objJson[typeTag]) {
+                                switch (objJson[typeTag]) {
+                                    case 'function':
+                                        tDiv = appDiv(container, rootStr + ' : ' + objJson[typeTag]);
+                                        for (let len = attr.length, i = 0; i < len; i++) {
+                                            if (attr[i] != typeTag) {
+                                                showAllAttr(tDiv, objJson[attr[i]], rootStr + '.' + attr[i]);
+                                            }
+                                        }
+                                        break;
+                                    case 'object':
+                                        tDiv = appDiv(container, rootStr + ' : ' + objJson[typeTag]);
+                                        for (let len = attr.length, i = 0; i < len; i++) {
+                                            if (attr[i] != typeTag) {
+                                                // appDiv(tDiv, rootStr + '.' + attr[i] + ' : ' + objJson[attr[i]]);
+                                                showAllAttr(tDiv, objJson[attr[i]], rootStr + '.' + attr[i]);
+                                            }
+                                        }
+                                        break;
+                                }
+                            } else {
+                                appDiv(container, rootStr + ' : ' + 'object');
+                            }
+                            break;
+                    }
+            }
+        }
+
+
+
+        window.addEventListener('DOMContentLoaded', function () {
+            let iptTgt = document.querySelector('.ipt-tgt');
+            let iptLvl = document.querySelector('.ipt-lvl');
+            let currentDiv = document.querySelector('.map');
+            let btnPre = document.querySelector('.btn-pre');
+
+
+            iptTgt.addEventListener('blur', function () {
+                let level = iptLvl.value <= maxLevel ? iptLvl.value : maxLevel;
+                propertySum = 0;
+                let obj = parseObj(this.value, window);
+                if (obj != undefined) {
+                    currentDiv.innerHTML = '';
+                    let objJson = surveyObj(obj, level);
+                    let domFrame = document.createDocumentFragment();
+                    // showAllAttr(currentDiv, objJson, this.value);
+                    showAllAttr(domFrame, objJson, this.value);
+                    currentDiv.appendChild(domFrame);
+                } else {
+                    currentDiv.innerHTML = '';
+                    showAllAttr(currentDiv, 'undefined', '');
+                }
+
+            });
+
+            iptLvl.addEventListener('input', function(){
+                let reg = new RegExp('[^1-' + maxLevel + ']|[1-' + maxLevel + ']{2,}');
+                this.value = this.value.replace(reg,'');
+            })
+
+            currentDiv.addEventListener('click', function (e) {
+                let newTarget = e.target.firstChild.textContent.split(' : ')[0];
+                iptTgt.focus();
+                iptTgt.value = newTarget;
+                iptTgt.blur();
+            });
+
+            btnPre.addEventListener('click', function (e) {
+                let newTarget = iptTgt.value.slice(0, iptTgt.value.lastIndexOf('.'));
+                iptTgt.focus();
+                iptTgt.value = newTarget;
+                iptTgt.blur();
+            });
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax study 4</title>
+</head>
+<body>
+<h3>insert user</h3>
+<form id="postform">
+    name:<input type="text" id="name">
+    age:<input type="text" id="age">
+    <input type="submit" value="insert">
+</form>
+<br>
+<h3>query user</h3>
+<form id="getform">
+    name: <input type="text" id="name1">
+    <input type="submit" value="query">
+</form>
+<p id="showuser"></p>
+
+<script>
+    document.getElementById("postform").addEventListener("submit", postForm);
+    document.getElementById("getform").addEventListener("submit", getForm);
+
+    function xmlRequestCreate(){
+        if(window.XMLHttpRequest) {
+            return new XMLHttpRequest()
+        }else{
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+
+    function postForm(e){
+        var name,
+            age,
+            params,
+            xhr,
+            pshow;
+        e.preventDefault();
+        name = document.getElementById("name").value;
+        age = document.getElementById('age').value;
+        pshow = document.getElementById("showuser");
+        params="name="+name+"&age="+age;
+        xhr=xmlRequestCreate();
+        xhr.open("post", "ajax_mysql_post.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.onload=function() {
+            if(xhr.status==200) {
+                pshow.innerHTML=xhr.responseText;
+            }
+        };
+        xhr.send(params);
+    }
+
+    function getForm(e){
+        var name,
+            age,
+            params,
+            xhr,
+            pshow;
+        e.preventDefault();
+        pshow = document.getElementById("showuser");
+        name=document.getElementById("name1").value;
+        params="name="+name;
+        xhr=xmlRequestCreate();
+        xhr.open("get", "ajax_mysql_get.php?"+params, true);
+        xhr.onload=function () {
+            pshow.innerHTML=xhr.responseText;
+        }
+        xhr.send();
+    }
+
+</script>
+
+</body>
+</html>

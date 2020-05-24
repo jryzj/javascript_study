@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery study1</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        *
+        {
+            font-family: 微软雅黑;
+        }
+
+        #solider
+        {
+            width:400px;
+            height:160px;
+            margin-left:-100px;
+            transition: 1s;
+        }
+
+/*
+        #solider:hover
+        {
+            margin-left:0px;
+            transform: scale(1.1);
+*/
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+
+<h3 id="title">JQUERY</h3>
+<p id="content">
+    jQuery 是一个高效、精简并且功能丰富的 JavaScript 工具库。它提供的 API 易于使用且兼容众多浏览器，这让诸如 HTML 文档遍历和操作、事件处理、动画和 Ajax 操作更加简单。如果你是一个 jQuery 新手，我们建议你先到jQuery 学习中心历练历练。
+    如果你是在升级新版本的 jQuery ，务必阅读我们博客上列出的版本发布说明。如果你以前使用的是 1.9 版本之前的 jQuery ，建议你再看一看 1.9 版本升级指南。
+</p>
+
+<br>
+<div style="width:400px;height:160px;overflow:hidden;">
+<img src="starwar1.jpg" id="solider">
+</div>
+<script>
+    $('#title').click(
+        function(){
+            $("#content").toggle("slow");
+        }
+    );
+
+    $("#solider").hover(function () {
+        $(this).animate({marginLeft:"0px"},600);
+    },
+        function () {
+            $(this).animate({marginLeft:"-100px"},600);
+        }
+    );
+
+
+</script>
+
+</body>
+</html>

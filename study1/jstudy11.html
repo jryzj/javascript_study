@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax study 2</title>
+    <style type="text/css">
+        #users{
+        padding:10px;
+        background:#ddd;
+        border:1px solid #444
+        }
+
+        #users ul{
+            padding:5px;
+            margin:5px;
+            background:#eee;
+            border:1px solid #fff
+        }
+
+        #users ul li{
+            list-style:none;
+        }
+
+    </style>
+</head>
+<body>
+<button id="button">get users</button>
+<h3>Here are users data:</h3>
+<div id="users">
+<ul>
+<li>data</li>
+    <li>data</li>
+</ul>
+    <ul>
+        <li>data</li>
+        <li>data</li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var btn = document.getElementById("button");
+    btn.addEventListener("click", getData, false);
+
+    function getData(){
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest();
+        }else
+        {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.open("get", "https://api.github.com/users", true);
+        xhr.onload=function(){
+            if(xhr.status==200){
+                var div=document.getElementById("users");
+                var users="";
+                var userdata = JSON.parse(xhr.responseText);
+                for(var i in userdata){
+                    users+="<ul>"+
+                    "<li>"+"<img src="+userdata[i].avatar_url+"width=64px height=64px>"+"</li>"+
+                        "<li>"+userdata[i].login+"</li>"+
+                        "</ul>";
+                }
+                div.innerHTML=users;
+            }
+        }
+        xhr.send();
+
+    }
+
+</script>
+</body>
+</html>

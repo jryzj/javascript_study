@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- demo of bar dancing-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 720px;
+            height: 360px;
+            margin: 20px auto;
+            /* border: 1px solid red; */
+            border-radius: 5px;
+            /* background-color: lightblue; */
+        }
+
+        .num {
+            height: 10%;
+            line-height: 10%;
+            margin: 0px auto;
+            padding: 3%;
+            text-align: center;
+            /* background-color: lightblue; */
+        }
+
+        .num input {
+            height: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            text-align: center;
+        }
+
+        .bars {
+            height: 58%;
+            width: 80%;
+            margin: 5% auto;
+            /* padding: 5%; */
+            text-align: center;
+            /* background-color: #eee; */
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .bar {
+            width: 2%;
+            min-width: 10px;
+            height: 10px;
+            background-color: rgb(73, 167, 221);
+            border-style: solid;
+            border-width: 0px 2px;
+            border-color: #eee;
+            border-radius: 4px 4px 0px 0px;
+            transition: all 3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="num">
+            <input type="text" oninput="this.value = this.value.replace(/^0+|[^0-9]/g,'');" value=1>
+            <!-- only digital and not 0 beginning -->
+        </div>
+        <div class="bars">
+            <div class="bar"></div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            function createEvent(eName, data, allFeatures) {
+                let evt;
+                if (allFeatures) {
+                    evt = new CustomEvent(eName, allFeatures);
+                } else if (data) {
+                    evt = new CustomEvent(eName, {
+                        detail: data
+                    });
+                } else {
+                    return null;
+                }
+
+                return evt;
+            }
+
+            let currentTar = null;
+            let timer;
+            let timeStep = 100;
+            let oHeight = '10px';
+            let iptChg = createEvent('iptchg', {
+                value: 0
+            });
+            let ipt = document.querySelector('.num input');
+            let container = document.querySelector('.container');
+            let bars = document.querySelector('.container .bars');
+            let bar = document.querySelector('.bars .bar');
+            let t = 0;
+
+            let transitions = {
+                'transition': 'transitionend',
+                'MozTransition': 'transitionend',
+                'WebkitTransition': 'webkitTransitionEnd',
+                'OTransition': 'oTransitionEnd'
+            }
+
+            for (let k in transitions) {
+                let h = document.querySelector('html');
+                if (h.style[k] != undefined) {
+                    transitions = [k, transitions[k]];
+                    break;
+                }
+            }
+            console.log(transitions);
+
+
+            ipt.addEventListener('blur', function (e) {
+                if (this.value.length == 0) {
+                    this.value = 1;
+                }
+                iptChg.detail.value = this.value;
+                // container.dispatchEvent(iptChg);  //method 1, using createDocumentFragment, and replace
+                bars.dispatchEvent(iptChg); //method 2, using createRange() and appendChild
+                //method 3, using innerHTML and appendChild
+            });
+
+            // method 1
+            // container.addEventListener('iptchg', function(e){            
+            //     bars = document.querySelector('.container .bars')    
+            //     if (this.querySelectorAll('.bars .bar').length != e.detail.value){
+            //         let barGroup = document.createDocumentFragment();
+            //         for (let i = 0; i < e.detail.value; i++){
+            //             barGroup.appendChild(bar.cloneNode(true));
+            //         }
+            //         let newBars = bars.cloneNode();
+            //         newBars.appendChild(barGroup);
+            //         this.replaceChild(newBars, bars);
+
+            //     }
+            //     console.log(e.detail.value);
+            // });
+
+
+            container.addEventListener('mouseover', function (e) {
+                let target = e.target;
+                if (target.classList.contains('bar')) {
+                    if (currentTar != target) {
+                        currentTar = target;
+                        timer = setInterval(function () {
+                            if (currentTar) {
+                                let height = parseInt(target.style['height'] || (target
+                                    .currentStyle ?
+                                    target
+                                    .currentStyle['height'] : getComputedStyle(target,
+                                        null)[
+                                        'height']));
+
+                                let heightDelta = Math.round((100 - height) / 5);
+                                height += heightDelta;
+                                target.style.height = height + "%";
+                            }
+                        }, timeStep);
+                    }
+
+
+                }
+
+            });
+
+            container.addEventListener('mouseout', function (e) {
+                let target = e.target;
+                if (target.classList.contains('bar')) {
+                    // target.style.height = oHeight;
+                    currentTar = null;
+                    clearInterval(timer);
+                }
+            });
+
+            container.addEventListener(transitions[1], function (e) {
+                let target = e.target;
+                console.log(target.style.height);
+                if (target.style.height != oHeight) {
+                    if (target.classList.contains('bar')) {
+                        //method 1
+                        // let tStyle = target.style;
+                        // console.log(tStyle);
+                        // tStyle.height = oHeight;
+                        // tStyle[transitions[0]] =  target.style.height /10 + 's';
+                        // target.style = tStyle;
+
+                        //method 2
+                        console.log({
+                            [transitions[0]]: parseInt(target.style.height) / 5 + 's'
+                        });
+                        Object.assign(target.style, {
+                            [[transitions[0]] + 'Duration']: parseInt(target.style.height) / 10 + 's',
+                            // [[transitions[0]] + 'Duration']: target.attributeStyleMap.get('height').value / 10 + 's', //ie 不支持
+                            height: oHeight
+                        });
+
+                    }
+                }
+
+            });
+
+            bars.addEventListener('iptchg', function (e) {
+                if (this.querySelectorAll('.bars .bar').length != e.detail.value) {
+                    let barGroup = document.createDocumentFragment();
+                    for (let i = 0; i < e.detail.value; i++) {
+                        let bt = bar.cloneNode(true);
+                        bt.style.height = oHeight;
+                        barGroup.appendChild(bt);
+                    }
+                    //method2
+                    // let range = document.createRange();
+                    // range.selectNodeContents(this);
+                    // range.deleteContents();
+                    // this.appendChild(barGroup);
+                    // range.detach();           
+                    // range = null; 
+
+                    //method3
+                    this.innerHTML = '';
+                    this.appendChild(barGroup);
+                }
+                console.log(e.detail.value);
+            });
+        });
+    </script>
+</body>
+
+</html>

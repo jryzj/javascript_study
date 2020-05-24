@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jstudy16 bootstrap</title>
+    <!--<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>-->
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <!--<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <!--   &lt;!&ndash; 开发环境版本，包含了用帮助的命令行警告 -->
+       <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src="https://cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <style>
+        body {
+            font-family: "微软雅黑", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #333333;
+            background-color: #ffffff;
+            margin:15px;
+        }
+        .container {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin: 15px;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div class="container">
+    <button class="btn btn-primary">primary btn</button>
+    <button class="btn btn-danger">danger btn</button>
+    <input type="button" value="btn-input" class="btn btn-info">
+    <a href="#" class="btn btn-success">btn-href</a>
+    <button class="btn btn-outline-info">btn-outline</button>
+    <button class="btn btn-warning btn-lg">large btn</button>
+    <button class="btn btn-outline-info btn-sm " id="toggleBtn">small-btn</button>
+    <button class="btn btn-primary" disabled>disabled btn</button>
+    <button class="btn btn-primary active">actived btn</button>
+    <button class="btn btn-primary" data-toggle="button" >toggle btn</button>
+    <button class="btn btn-secondary btn-block">btn-sceondary-block</button>
+    <br>
+
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-primary">btn-1</button>
+        <button class="btn btn-primary" style="margin-left:5px">btn-2</button>
+        <button class="btn btn-primary" style="margin-left:5px">btn-3</button>
+    </div>
+    <div class="btn-group">
+        <button class="btn btn-primary">btn-1</button>
+        <button class="btn btn-primary">btn-2</button>
+        <button class="btn btn-primary">btn-3</button>
+        <!--<div class="btn-group">-->
+            <!--需要popper.js实现下拉菜单-->
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">dropdown</button>
+            <!--必须有data-toggle="dropdown"-->
+            <div class="dropdown-menu">
+                <button class="dropdown-item">dropdwon1</button>
+                <button class="dropdown-item">dropdown2</button>
+            </div>
+        <!--</div>-->
+    </div>
+
+    <div class="btn-group-vertical">
+        <button class="btn btn-primary">1</button>
+        <button class="btn btn-primary">2</button>
+        <button class="btn btn-primary">3</button>
+    </div>
+
+    <div class="btn-group btn-group-sm">
+
+        <button class="btn btn-primary">alsomenu</button> <!--这个button使alsomenu也能起到功能菜单的作用，而不是弹出下级菜单-->
+        <button class="btn btn-primary dropdown-toggle" style="border-top-right-radius:0px;border-bottom-right-radius:0px" data-toggle="dropdown"></button> <!--这个button只是用于点击显示下级菜单-->
+        <!--上面的style="border-top-right-radius:0px;border-bottom-right-radius:0px"只是为了使菜单之间显示起来像融合在一起，好看些
+            因为dropdown-toggle类默认右边是带圆角的。-->
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">item11</a>
+                <a href="#" class="dropdown-item">item12</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">item13</a>
+            </div>
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">dropdown1</button>
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-item">item01</a>
+                <a href="#" class="dropdown-item">item02</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">item03</a>
+            </div>
+    </div>
+
+    <div class="btn-group btn-group-lg dropup"> <!--这里是dropup，其他地方还是dropdown-->
+        <button class="btn btn-danger dropdown-toggle" data-toggle="dropdown">dropup</button>
+            <div class="dropdown-menu">
+                <button class="dropdown-item">dropup-1</button>
+                <button class="dropdown-item">dropup-2</button>
+                <button class="dropdown-item">dropup-3</button>
+            </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4 btn-primary">
+            <p>col-1</p>
+        </div>
+        <div class="col-sm-6 btn-primary">
+            <p>col-2</p>
+        </div>
+        <div class="col-sm-2 btn-primary">
+            <p>col-3</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-9 btn-primary" style="background: #ccc">col-xs-9</div>
+        <div class="col-4">col-xs-4 Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
+        <div class="col-3">col-xs-6 Subsequent columns continue along the new line.</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 offet-md-2 btn-info">offset2</div>
+        <div class="col-md-4 offset-md-2">offset2</div>
+    </div>
+
+   <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-8 btn-info" style="height:50px">son-col-8</div>
+                <div class="col-4">son-col-4</div>
+            </div>
+        </div>
+        <div class="col-md-4 offset-md-2">offset2</div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">col-one-3</div>
+        <div class="col-md-auto">col-autowertgsrtthgsrtghwrhr</div>
+        <div class="col-3">col-two-3</div>
+    </div>
+
+    <div class="row">
+        <div class="col">col01</div>
+        <div class="col">col02</div>
+        <div class="col">col03</div>
+    </div>
+
+    <div class="media">
+        <a href="#" class="media-left">
+            <img src="" alt="" class="media-object" data-src="holder.js/64x64">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading">Media -heading</h4>
+            hello, here to put media content!
+            <div class="media">
+                <div class="media-body">
+                    here is nesting media!<br>
+
+                    here is nesting media!<br>
+
+                    here is nesting media!<br>
+
+                    here is nesting media!<br>
+                </div>
+                <a href="" class="align-self-center ml-3"> <!-在div class="media"中顺序决定了布局，从左到右-->
+                    <img src="" alt="" class="media-object" data-src="holder.js/32x32">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+$("#toggleBtn").click(function(){
+    // $(this).toggleClass("active");
+    $(this).button('toggle');
+});
+
+</script>
+</body>
+</html>

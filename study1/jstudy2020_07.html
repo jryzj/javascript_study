@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            position: relative;
+            width: 60%;
+            min-width: 400px;
+            margin: auto;
+            margin-top: 50px;
+            padding-bottom: 50px;
+            border-radius: 5px;
+            background: url(minecraft-001.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+
+            /* background-color: rgb(99, 207, 240); */
+            box-shadow: 0px 0px 40px 0px rgb(156, 206, 224);
+            overflow: hidden;
+
+            moz-user-select: -moz-none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+        }
+
+        .panel {
+            width: 60%;
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            background-color: rgba(99, 207, 240, 0.5);
+        }
+
+        .playground {
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            background-color: rgba(99, 207, 240, 0.8);
+            border-radius: 5px;
+        }
+
+        .card {
+            width: 32px;
+            height: 32px;
+            background-color: #fff;
+            /* background: url(minecraftid-1.png) no-repeat 100px 100px; */
+            border: 1px solid #eee;
+            border-radius: 5px;
+            color: rgb(156, 206, 224);
+            text-align: center;
+            line-height: 32px;
+        }
+
+        .card-removed {
+            /* width: 48px;
+            height: 48px; */
+            width: 32px;
+            height: 32px;
+            /* background-color: rgb(99, 207, 240); */
+            border: 1px solid rgba(99, 207, 240, 0);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .m-left-20 {
+            margin-left: 20px;
+        }
+
+        .ipt {
+            border: none;
+            border-bottom: 1px solid rgb(2, 191, 248);
+            background-color: rgb(99, 207, 240);
+            width: 40px;
+            outline: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .btn-s {
+            border-radius: 20px;
+            background-color: rgb(99, 207, 240);
+        }
+
+        .gameover {
+            position: absolute;
+            width: 160px;
+            height: 60px;
+            border-radius: 10px;
+            top: 10000px;
+            color: rgb(241, 52, 99);
+            text-align: center;
+            line-height: 60px;
+            z-index: 999;
+            background-color: rgba(99, 207, 240, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="panel">
+            <span>方阵大小：</span><input class='ipt' id='size' type="text" value=4>
+            <span>难度：</span><input class='ipt' id='difficulty' type="text" value=3>
+            <span class="m-left-20">时间：</span><span class='timer'>00:00:00</span>
+            <span class="m-left-20"><button class="btn-s">开始</button></span>
+        </div>
+        <div class="playground">
+            <div class="card fl" data-card-id="0"></div>
+        </div>
+        <div class="gameover">GAME OVER!</div>
+    </div>
+
+
+
+    <script>
+        //w32,h32, sx32, sy48, xspan43, yspan51, m79, 11x43+3,,11x22+8
+
+        //insert son element in parent element, qty is number
+        function insertNode(parent, son, number) {
+            let fragment = document.createDocumentFragment();
+            for (let i = 0; i < number; i++) {
+                let clone = son.cloneNode(true);
+                clone.dataset.cardId = i;
+                fragment.appendChild(clone);
+            }
+            parent.appendChild(fragment);
+        }
+
+        //generate random answer
+        //number, length of answer array
+        //range, distribution of answer from 0 - range
+        //level, the time the random number will be copied
+        function createPattens(number, range, level) {
+            let matrix = [];
+            level *= 2; //make the answer in couple
+
+            //algorithm
+            for (let i = 0; i < number;) {
+                let n1 = Math.random() * range; //random number1
+                let n2 = Math.random() * range; //random number2
+                let n = Math.round((n1 + n2) % range); //make the number more random
+                for (let l = 0; l < level; l++) {
+                    matrix.push({
+                        number: n, //answer
+                        visible: true, //show flag
+                        removed: false //removed flag
+                    });
+                    i++;
+                    if (i == number) {
+                        break;
+                    }
+                }
+            }
+
+            //shuffle the card matrix
+            for (let i = 0; i < number; i++) {
+                let n1 = Math.random() * (number - 1);
+                let n2 = Math.random() * (number - 1);
+                let n3 = Math.round(Math.random() * (number - 1));
+                let n = Math.round((n1 + n2) % (number - 1));
+
+                let t = matrix[n3];
+                matrix[n3] = matrix[n];
+                matrix[n] = t;
+            }
+            return matrix;
+        }
+
+        //show card
+        function showCard(parentEle, id, toggle, cardMatrix, bgScale, iconsInfo) {
+            if (toggle) { //show
+                card = parentEle.querySelector("[data-card-id = \'" + id + "\']");
+                // card.innerHTML = cardMatrix[id]['number'];
+                card.innerHTML = '';
+                //change background image position to show responsing icon
+                card.style.backgroundPosition = calcIconXY(iconsInfo, cardMatrix[id]['number'], bgScale);
+                cardMatrix[id]['visible'] = true;
+            } else { //hidde
+                card = parentEle.querySelector("[data-card-id = \'" + id + "\']");
+                // card.innerHTML = 'card';
+                //change background image position to hidde icon
+                card.style.backgroundPosition = '100px 100px';
+                // card.style.transform = 'scale(' + bgScale + ')';
+                cardMatrix[id]['visible'] = false;
+            }
+        }
+
+        //remove card
+        function removeCard(parentEle, clsName, id, cardMatrix) {
+            let card = parentEle.querySelector("[data-card-id = \'" + id + "\']");
+            cardMatrix[id]['removed'] = true;
+            cardMatrix[id]['visible'] = false;
+            card.classList.toggle(clsName);
+            card.innerHTML = '';
+            card.style.backgroundPosition = '100px 100px';
+        }
+
+        //get the style after show
+        function getStyle(element) {
+            if (window.getComputedStyle) {
+                return getComputedStyle(element, null);
+            } else {
+                return element.currentStyle;
+            }
+        }
+
+        //set time in element
+        function setTime(ele, start) {
+            let now = Date.now();
+            let time = Math.floor((now - start) / 1000);
+            let hour = Math.floor(time / 3600);
+            let min = Math.floor((time - hour * 3600) / 60);
+            let second = time - hour * 3600 - min * 60;
+            if (hour < 10) {
+                hour = '0' + hour
+            }
+            if (min < 10) {
+                min = '0' + min
+            }
+            if (second < 10) {
+                second = '0' + second
+            }
+            ele.innerHTML = hour + ':' + min + ':' + second;
+            // console.log(now);
+        }
+
+        //calculate the position of icon
+        function calcIconXY(iconsInfo, id, bgScale) {
+            let row = Math.floor(id / iconsInfo.col);
+            let col = parseInt(id % iconsInfo.col);
+            let positionX = Math.round((iconsInfo.sx + col * iconsInfo.xspan) / bgScale);
+            let positionY = Math.round((iconsInfo.sy + row * iconsInfo.yspan) / bgScale);
+            console.log('position', positionX, positionY, row, col, iconsInfo, id);
+            return '-' + positionX + 'px' + ' -' + positionY + 'px';
+        }
+
+        window.addEventListener('load', function () {
+            //get the elements
+            let spanSize = document.querySelector('#size');
+            let spanDiff = document.querySelector('#difficulty');
+            let divPlayground = document.querySelector('.playground');
+            let divContainer = document.querySelector('.container');
+            let btnStart = document.querySelector('.btn-s');
+            let spanTimer = document.querySelector('.timer');
+            let spanMatrix = document.querySelector('span');
+            let divGameover = document.querySelector('.gameover');
+
+            let matrixSize; //size of matrix
+            const maxSize = 20;
+            let cardCounter; //number of removed cards
+            let cardMatrix; //array of cards answer
+            let cardRange; //473 is the number of icons on minecraftid.png
+            let diffLevel = 5; //default difficulty level of game, 
+            let maxDiffLevel = 6; //max difficulty level + 1, e.g. diffLevel is 5, then 6 - 5 = 1, 
+            //which means each pair of icon only will only be selected 1 time.
+            let maxPlayground = 0.9 * divContainer.offsetWidth; //max of div playground
+            let cardCouple; // save the id of card selected
+            let cardToggle = false; //flag, true means one card has been selected
+            let btnSToggle = false; //flag, true means game is running
+            let showAns = false; //flag, true means the answer is showing
+            let startTime; //time of game beginning
+            let timer; //timer to set running time from startTime
+            let btnClick = new CustomEvent('btnClick'); //custom event
+
+            let iconScale = 1; //scale of icon image
+            let cardScale = 1; //scale of card
+            let bgScale = 1;
+            let iconBaseSize = 32;
+
+            // let img = 'minecraftid.png'; //collection of icons
+            // let iconsInfo = {
+            //     'sx': 33,
+            //     'sy': 48,
+            //     'w': 32,
+            //     'h': 32,
+            //     'xspan': 43,
+            //     'yspan': 51,
+            //     'col' : 11,
+            //      'row' : 43,
+            //      'qty' : 473
+            // };
+            // let img = 'minecraftid-1.png'; //collection of icons
+            // let iconsInfo = {
+            //     'sx': 0,
+            //     'sy': 0,
+            //     'w': 32,
+            //     'h': 32,
+            //     'xspan': 32,
+            //     'yspan': 32,
+            //     'col': 32,
+            //     'row': 114,
+            //     'qty': 3648
+            // };
+            let img = 'legoid-2.png'; //collection of icons
+            let iconsInfo = {
+                'sx': 12, //22
+                'sy': 8, //20
+                'w': 124, //124 ,96
+                'h': 124, //122 ,106 ,96
+                'xspan': 138,
+                'yspan': 133,
+                'col': 9,
+                'row': 33,
+                'qty': 297
+            };
+
+
+
+            // check and force value of matrix size is number
+            spanSize.addEventListener('input', function () {
+                this.value = this.value.replace(/^0+|[^0-9]/g, '');
+                // if (!this.value) {
+                //     this.value = 2;
+                // } else if (this.value % 2 != 0) {
+                //     this.value = this.value + 1;
+                // }
+                // if (this.value > maxSize) {
+                //     this.value = maxSize;
+                // }
+
+            });
+
+            //check and force value of diffculty level is between 1-5
+            spanDiff.addEventListener('input', function () {
+                this.value = this.value.replace(/^0+|[^1-5]/g, '');
+            });
+
+            spanSize.addEventListener('blur', function () {
+                //reset
+                cardToggle = false;
+                matrixSize = this.value;
+                diffLevel = spanDiff.value;
+                iconScale = 1;
+                bgScale = iconsInfo.w / iconBaseSize;
+                cardRange = iconsInfo.qty;
+
+                //set matrixSize
+                if (matrixSize == 0) {
+                    matrixSize = 2;
+                } else {
+                    if (matrixSize % 2 != 0) {
+                        matrixSize++;
+                    }
+                    if (matrixSize > maxSize) {
+                        matrixSize = maxSize;
+                    }
+                }
+                this.value = matrixSize;
+
+                //save the card orginal style
+                let card = divPlayground.firstElementChild;
+                card.classList.remove('card-removed');
+                card.style.transform = 'scale(1)';
+                let iconBgWidth = iconsInfo.xspan * (iconsInfo.col - 1) + iconsInfo.w + 2 * iconsInfo
+                    .sx;
+                console.log(iconBgWidth);
+                // card.style.backgroundSize = (iconBgWidth / bgScale) + 'px';
+                card.style.background = 'url(' + img + ') no-repeat 100px 100px/' + (iconBgWidth /
+                    bgScale) + 'px';
+                let cardWidth = card.offsetWidth;
+
+                //set card size
+                if (cardWidth * matrixSize > maxPlayground) {
+                    cardWidth = Math.floor(maxPlayground / matrixSize);
+                }
+
+                //
+
+                //create cards in playground
+                let cardNode = card.cloneNode(true);
+                //create first card
+                cardNode.style.width = cardWidth - 2 * parseInt(getStyle(card).borderWidth) + 'px';
+                cardNode.style.height = cardNode.style.width;
+                cardNode.style.lineHeight = cardNode.style.height;
+                // cardNode.innerHTML = 'card';
+                console.log(cardNode.style.width);
+
+                //set playground
+                divPlayground.innerHTML = '';
+                divPlayground.style.width = cardWidth * matrixSize + 'px';
+                divPlayground.style.height = divPlayground;
+
+                matrixSize *= matrixSize; //calc total number of cards in playground
+                cardCounter = matrixSize; //reset counter
+
+                //rander playground
+                insertNode(divPlayground, card, matrixSize);
+
+                //make answer by random
+                cardMatrix = createPattens(matrixSize, cardRange, maxDiffLevel - diffLevel);
+                console.log(cardMatrix);
+
+                //for the show of 'game over'
+                divGameover.style.top = '10000px';
+                divGameover.style.left = (parseInt(getStyle(divContainer).width) - parseInt(
+                    getStyle(
+                        divGameover).width)) / 2 + 'px';
+                // divGameover.style.height = parseInt(getStyle(divContainer).height) + 'px';
+                // divGameover.style.lineHeight = parseInt(getStyle(divContainer).height) + 'px';
+            });
+
+            //reaction when card has been clicked.
+            divPlayground.addEventListener('click', function (e) {
+                let card = e.target; //the target card which had been clicked.
+                console.log(card.dataset.cardId);
+                //start button has been clicked, and card is not removed, todo...
+                if (!cardMatrix[card.dataset.cardId]['removed'] && btnSToggle) {
+                    //if one card had been clicked, and the one just click is not the same one.
+                    if (cardToggle && card.dataset.cardId != cardCouple) {
+                        //if the answers of card are equal 
+                        if (cardMatrix[cardCouple].number == cardMatrix[card.dataset.cardId]
+                            .number) {
+                            //remove the two cards
+                            removeCard(this, 'card-removed', card.dataset.cardId, cardMatrix);
+                            removeCard(this, 'card-removed', cardCouple, cardMatrix);
+                            cardCounter -= 2; //count the catds remaining
+                            console.log(cardCounter);
+                            console.log('equal');
+                            //if cards are all removed, show gameover div
+                            if (cardCounter == 0) {
+                                //change the div top value to show
+                                divGameover.style.top = (parseInt(getStyle(divContainer).height) -
+                                    parseInt(getStyle(
+                                        divGameover).height)) / 2 + 'px';
+                                btnStart.click(); //stimulate click of start button, timer stops. 
+                            }
+                        } else {
+                            //hidde card answer
+                            showCard(this, cardCouple, false, cardMatrix, cardScale, iconsInfo);
+                            showCard(this, card.dataset.cardId, false, cardMatrix, cardScale,
+                                iconsInfo);
+                            console.log('not equal');
+                        }
+                        console.log(cardMatrix[cardCouple].number, cardMatrix[card.dataset.cardId]
+                            .number);
+                        cardToggle = false;
+                    } else {
+                        //first card has been click
+                        cardCouple = card.dataset.cardId; //save the id of card
+                        cardToggle = !cardToggle; //set flag means fisrt card has been clicked
+                        showCard(this, cardCouple, cardToggle, cardMatrix,
+                            cardToggle ? bgScale : cardScale, iconsInfo); //show the card answer
+                    }
+                }
+            });
+
+            //reaction of start button has been clicked
+            btnStart.addEventListener('click', function () {
+                btnSToggle = !btnSToggle; //set flag
+                if (btnSToggle) { //means game begin now
+                    this.innerHTML = '结束';
+                    spanSize.focus();
+                    spanSize.blur();
+
+                } else {
+                    this.innerHTML = '开始'; //means game stopped.
+                }
+                spanTimer.dispatchEvent(btnClick); //raise event message
+            });
+
+            //start timer
+            spanTimer.addEventListener('btnClick', function () {
+                if (btnSToggle) {
+                    console.log('开始');
+                    startTime = Date.now();
+                    timer = setInterval(setTime, 1000, spanTimer, startTime);
+                } else {
+                    clearInterval(timer);
+                    console.log('结束');
+                }
+            });
+
+            //bonus to show all answer
+            spanMatrix.addEventListener('dblclick', function () {
+                showAns = !showAns;
+                for (let i = 0; i < matrixSize; i++) {
+                    if (!cardMatrix[i]['removed']) {
+                        showCard(divPlayground, i, showAns, cardMatrix, showAns ? bgScale :
+                            cardScale, iconsInfo);
+                    }
+                }
+            });
+
+            // setTimeout(function () {
+            //     spanSize.focus();
+            //     spanSize.blur();
+            // }, 500);
+            spanSize.focus();
+            spanSize.blur();
+
+        });
+    </script>
+</body>
+
+</html>

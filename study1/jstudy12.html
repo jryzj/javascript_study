@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax study 3</title>
+</head>
+<body>
+<h3>content returned</h3>
+<p id="showphp">here will show hello world!</p>
+<br>
+
+<h3>获取PHP文件</h3>
+<button id="btn1" style="font-size: 20px">hello world</button>
+
+<br>
+
+<h3>正常表单GET提交数据到PHP</h3>
+<form action="helloworld.php" method="get">
+Name:<input type="text" name="name"><br>
+    Age:<input type="text" name="age"><br>
+<input type="submit" value="getphp">
+</form>
+<br>
+
+<h3>Ajax请求数据GET</h3>
+<form id="getForm">
+    name: <input type="text" name="name" id="name1"><br>
+    age: <input type="text" name="age" id="age1"><br>
+    <input type="submit" value="getfrom">
+</form>
+<br>
+
+<h3>正常表单POST提交数据到PHP</h3>
+<form action="helloworld.php" method="post">
+    name: <input type="text" name="name" id="name2"><br>
+    age: <input type="text" name="age" id="age2"><br>
+    <input type="submit" value="postfrom">
+</form>
+<br>
+
+<h3>Ajax请求数据POST</h3>
+<form id="postForm" >
+    name: <input type="text" name="name" id="name3"><br>
+    age: <input type="text" name="age" id="age3"><br>
+    <input type="submit" value="postfrom">
+</form>
+<br>
+
+
+
+<script>
+    document.getElementById("btn1").addEventListener("click", showPhp);
+    document.getElementById("getForm").addEventListener("submit",getForm);
+    document.getElementById("postForm").addEventListener("submit", postForm);
+
+
+
+    function xmlRequestCreate(){
+        if(window.XMLHttpRequest){
+            return new XMLHttpRequest();
+        }
+        else{
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+
+    function showPhp() {
+        var xhr,
+            pshow;
+
+        xhr=xmlRequestCreate();
+        xhr.open("get","helloworld.php",true);
+        pshow = document.getElementById("showphp");
+        xhr.onload = function () {
+            if(xhr.status==200) {
+                pshow.innerText=xhr.responseText;
+                console.log(this.responseText);
+            }
+        }
+        xhr.send();
+    }
+
+    function getForm(e){
+        var xhr,
+            name,
+            age;
+        e.preventDefault();//阻止默认的表单提交行为
+        xhr=xmlRequestCreate();
+        name=document.getElementById("name1").value;
+        age=document.getElementById('age1').value;
+        xhr.open("get","helloworld.php?name="+name+"&age="+age);
+        xhr.onload=function () {
+            if(xhr.status==200){
+                document.getElementById("showphp").innerText=xhr.responseText;
+            }
+        }
+        xhr.send();
+    }
+
+    function postForm(e) {
+        var xhr,
+            params,
+            name,
+            age;
+        e.preventDefault();
+        name = document.getElementById("name3").value;
+        age = document.getElementById("age3").value;
+        params = "name=" + name + "&age=" + age;
+        xhr=xmlRequestCreate();
+        xhr.open("POST","helloworld.php",true);
+        //设置请求头
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xhr.onload=function(){
+            if(xhr.status==200){
+                document.getElementById("showphp").innerText=xhr.responseText;
+            }
+        }
+        xhr.send(params);
+    }
+
+
+</script>
+</body>
+</html>

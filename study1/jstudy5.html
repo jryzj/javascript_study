@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript study2</title>
+</head>
+<body>
+<script>
+    function petVoice(pet) {
+        switch (pet) {
+            case 'cat':
+                return ('miao miao ....');
+                break;
+            case 'dog':
+                return ('wang wang .....');
+                break
+            case 'bird':
+                return ('twitter ....');
+                break;
+            default :
+                return ('dont know!');
+        }
+    }
+
+    document.write(petVoice(prompt('input a pet:')))
+
+</script>
+
+</body>
+</html>

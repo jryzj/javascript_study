@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- demo of playing card -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <style>
+    .noselect {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -khtml-user-select: none;
+        user-select: none;
+    }
+    .container {
+        width: 40%;
+        margin: 50px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+    .deal {
+        width: 60%;
+        margin: 15px auto;
+        text-align: center;
+    }
+    .cards {
+        width: 90%;
+        margin: 5px auto;
+        min-height: 52px;
+        padding: 10px;
+        border: 1px solid lightblue;
+        overflow: hidden;
+    }
+    .card {
+        width: 24px;
+        height: 30px;
+        margin: 10px;
+        border: 1px solid #666;
+        border-radius: 3px;
+        float: left;
+        text-align: center;
+        line-height: 30px;
+        color: red;
+    }
+    .pick-card {
+        position: relative;
+        top: -5px;
+    }    
+    .played-cards {
+        width: 90%;
+        margin: 5px auto;
+        min-height: 52px;
+        padding: 10px;
+        border: 1px solid lightblue;
+        overflow: hidden;
+    }
+    .played-card {
+        background-color: #bbb;
+    }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container noselect">
+        <div class="deal">
+            <button class = "deal-card">发牌</button>
+            <button class = "draw-card">抓牌</button>
+            <button class = "play-card">出牌</button>
+        </div>
+        <div class="played-cards"></div>
+        <div class="cards">
+        </div>
+
+    </div>
+
+    <script>
+        const defNum = 10, cardMax = 13, cardColor =['red', 'black', 'green', "blue"];
+        const cardElmt = 'div', cardsCls = 'cards', playedCardsCls = 'played-cards';
+        const cardCls = 'card', pickCardCls = 'pick-card', playedCardCls = 'played-card';
+        const btnDealCls = 'deal-card', btnDrawCls = 'draw-card', btnPlayCls = 'play-card';
+        let btnDeal, btnDraw, btnPlay;
+
+
+        function randomCards(number){
+            let cards = [], card, color;
+            for(let i = 0; i < number; i++){
+                card = Math.floor(Math.random()*cardMax) + 1; // 1 ~ 13, floor and plus 1 for balance random
+                color = Math.floor(Math.random()*cardColor.length); // 0 ~ 3
+                cards.push([card, color]);
+            }
+            return cards;
+        }
+
+        function parseCard(card) {
+            let number, color;
+            switch (true) {
+                case card[0] < 2 :
+                    number = "A";
+                    break;
+                case card[0] < 11:
+                    number = String(card[0]);
+                    break;
+                case card[0] <= 13:
+                    number = String.fromCharCode(card[0] - 10 + 73);
+                    break;
+            }
+
+            return [number, cardColor[card[1]]];
+
+        }
+
+        function insertCards(container, cards, cardElmt, cardCls){
+            let length = cards.length;
+            let element, card;
+            for(let i = 0; i < length; i ++){
+                element = document.createElement(cardElmt);
+                element.className = cardCls;
+                card = parseCard(cards[i]);
+                element.innerHTML = card[0];
+                element.style.color = card[1];
+                // element.setAttribute('onselectstart', 'return false');
+                // element.style['-moz-user-select'] = 'none';
+                container.appendChild(element);
+            }
+        }
+
+        function addToggle(container, targetCls, cls) {
+            container.addEventListener('click', function(e){
+                let reg = new RegExp('\\b' + targetCls + '\\b');
+                if (reg.test(e.target.className)){
+                    //mothod 1
+                    // let index = e.target.className.indexOf(cls);
+                    // switch (true) {
+                    //     case index == 0:
+                    //     e.target.className = e.target.className.replace(cls, '');
+                    //     break;
+                    //     case index > 0:
+                    //     e.target.className = e.target.className.replace(' ' + cls, '');
+                    //     break;
+                    //     default:
+                    //     let clsName = ' ' + cls;
+                    //     e.target.className += clsName;                   
+                    // }
+                    
+                    //method 2
+                    e.target.classList.toggle(cls);
+                }
+
+            })
+        }
+
+        function noSelect(container) {
+            container.addEventListener('onselectstart', function(e){
+                e.target.preventDefault();
+            })
+        }
+
+        noSelect(document);
+        btnDeal = document.getElementsByClassName(btnDealCls)[0];
+        btnDraw = document.getElementsByClassName(btnDrawCls)[0];
+        btnPlay = document.getElementsByClassName(btnPlayCls)[0];
+
+        btnDeal.addEventListener('click', function(e){
+            let cardsDealed = document.getElementsByClassName(cardsCls)[0];
+            this.disabled = true;
+            insertCards(cardsDealed, randomCards(defNum), cardElmt, cardCls);
+            addToggle(cardsDealed, cardCls, pickCardCls);
+        });
+
+        btnPlay.addEventListener('click', function(e){
+            let cardsDealed = document.getElementsByClassName(cardsCls)[0];
+            let cardsPlayed = document.getElementsByClassName(playedCardsCls)[0];
+            let cardsPicked = cardsDealed.getElementsByClassName(pickCardCls);
+
+            console.log(cardsPicked.length);
+
+            while (cardsPicked.length){
+                cardsPlayed.appendChild(cardsPicked[0]);
+            }          
+
+        });
+
+        btnDraw.addEventListener('click', function(e){
+            let cardsDealed = document.getElementsByClassName(cardsCls)[0];
+            let cards = cardsDealed.getElementsByClassName(cardCls);
+            if(cards.length < defNum){
+                insertCards(cardsDealed, randomCards(defNum - cards.length), cardElmt, cardCls);
+            //     addToggle(cardsDealed, cardCls, pickCardCls);
+            }
+        });
+
+
+
+
+
+    </script>
+</body>
+</html>

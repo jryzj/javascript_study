@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax study 1</title>
+</head>
+<body>
+
+<p id="ajax">p here!</p>
+<button type="button" onclick="ajaxTest()">ajax test</button>
+
+<script>
+    function  ajaxTest() {
+        var xhr;
+        var p=document.getElementById('ajax');
+        if(window.XMLHttpRequest){ //IE7+, 及其他非IE浏览器执行
+            xhr=new XMLHttpRequest();
+        }else
+        {  //为兼容IE7以下的IE浏览器
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xhr.open("")
+
+        console.log(xhr);
+        xhr.open('get', 'ajax1.txt', true);
+
+        /*===================================*/
+        xhr.onreadystatechange=function (ev) {
+            console.log(xhr.readyState);
+            if(xhr.readyState==4 && xhr.status==200){
+                console.log(xhr.readyState);
+                p.innerText = xhr.responseText;
+            }
+        };
+
+
+        /*==============================      */
+/*        xhr.onload=function () {
+            console.log(xhr.readyState);
+            p.innerText=xhr.responseText;
+        }*/
+        xhr.send();
+
+        }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- illustration percentage by bar chart -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.bootcss.com/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <title>js202002</title>
+  <style>
+    * {
+      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      font-size: 16px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .container {
+      width: 400px;
+      margin: 20px auto;
+    }
+
+    .prompt {
+      width: 100%;
+      height: 50px;
+      text-align: center;
+    }
+
+    .prompt input {
+      width: 10%;
+      margin-left: 5%;
+      text-align: center;
+    }
+
+    .bar-chart input {
+      width: 80%;
+    }
+
+    .bar-chart {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      word-break: break-all;
+      border-spacing: 0px;
+    }
+
+    .bar-chart td {
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .bar-chart .col-number {
+      width: 15%;
+      text-align: center;
+    }
+
+    .bar-chart .col-number input {
+      text-align: right;
+    }
+
+    .bar-chart .col-pct {
+      width: 15%;
+      text-align: right;
+    }
+
+    .bar-chart .col-bar .bar {
+      width: 0%;
+      height: 80%;
+      border-radius: 15%;
+      display: block;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="prompt">
+      <span>分类数量:</span><input type="tel">
+    </div>
+    <table class="bar-chart">
+      <tbody>
+        <tr>
+          <td class="col-number">
+            <input type="number"></td>
+          <td class="col-pct">
+          </td>
+          <td class="col-bar">
+            <i class="bar">&nbsp</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let cateNum;
+
+    function barChart(cateNum, cls) {
+      function setRow(cateNum, cls) {
+        let tbody = document.querySelector(cls + ' tbody');
+        let tr = tbody.querySelector("tr");
+        tr.querySelector('.col-pct').innerHTML = '0%';
+        tr.querySelector('.col-bar i').style.width = '0%';
+        let trTmp='';
+
+        for (let i = 0; i < cateNum; i++) {
+          trTmp += tr.outerHTML;
+        }
+        tbody.innerHTML = trTmp;
+      }
+
+      function calculator(data) {
+        let sum = data.reduce(function (x, y) {
+          return x + y;
+        });
+
+        return sum === 0 ? [0, 0, 0, 0] : data.map(function (x) {
+          return x / sum;
+        });
+      }
+
+      function getValue(elmts) {
+        let data = [];
+        for (e of elmts) {
+          data.push(parseFloat(e.value) || 0);
+        }
+        return data;
+      }
+
+      function setPcts(elmts, pcts) {
+        for (let i = 0; i < pcts.length; i++) {
+          elmts[i].innerHTML = parseInt(pcts[i] * 100) + '%';
+        }
+      }
+
+      function setBars(elmts, pcts) {
+        for (let i = 0; i < pcts.length; i++) {
+          elmts[i].style.width = parseInt(pcts[i] * 100) + '%';
+        }
+      }
+
+      console.log(cateNum);
+      setRow(cateNum, cls);
+
+      let numbers = document.querySelectorAll(cls + ' .col-number input');
+      let pcts = document.querySelectorAll(cls + ' .col-pct');
+      let bars = document.querySelectorAll(cls + ' .col-bar i');
+
+      for (e of numbers) {
+        e.onblur = function () {
+          if (parseFloat(this.value) < 0 || this.value == -0) this.value = 0;
+          let data = getValue(numbers);
+          console.log(data);
+          let pct = calculator(data);
+          console.log(pct);
+          setPcts(pcts, pct);
+          setBars(bars, pct);
+        }
+      }
+    }
+
+    document.querySelector('.prompt input').onblur = function () {
+      cateNum = this.value;
+      barChart(cateNum, '.bar-chart');
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function A(model) {
+            this.model = model;
+        }
+
+        A.prototype = {
+            getModel: function () {
+                return this.model;
+            },
+            setModel: function (model) {
+                this.model = model;
+            }
+        }
+
+        function B(model, color, size) {
+            A.call(this, model);
+            this.color = color;
+            this.size = size;
+        }
+
+        function inherit(parent, son) { //method1
+            let temp = {};
+            temp.__proto__ = parent.prototype;
+            son.prototype = temp;
+            temp.constructor = son;
+        }
+
+        function inherit_1(parent, son) { //method2
+            function temp() {};
+            temp.prototype = parent.prototype;
+            son.prototype = new temp;
+            son.prototype.constructor = son;
+        }
+
+        inherit_1(A, B);
+
+        B.prototype.getColor = function () {
+            return this.color;
+        }
+
+        B.prototype.getSize = function () {
+            return this.size;
+        }
+
+        let b = new B('A-model', 'red', 'L');
+        console.log(b.getModel());
+        console.log(b.getColor());
+
+
+        let c = new B('B-model', 'green', 'M');
+        console.log(c.color);
+
+        console.log(b.getSize());
+
+        function inheritClass(fatherCls, sonClsName, params) {
+            //
+            //fatherCls: class, parent class.
+            //sonClsName: string, name of son class.
+            //params: list, list of parameters of parent and son class, parameters are all string.
+            //eg, let D = inheritClass(A, 'D', ['model', 'color', 'size']);
+            //D is the son class which extends parent class - A.
+            //A is the parent class.
+            //'D' is the name of son class, must equal variable D which will be assigned to.
+            //'model' is the parameter inherit from parent class, should be in the front of list.
+            //'color', 'size' are new parameters of son class, should be at end.
+
+            let fatherParams = params.slice(0, fatherCls.length);
+            let sonParams = params.slice(fatherCls.length);
+
+            let fPhrase = fatherCls.name + '.call(this,' + fatherParams + ');';
+
+            let sPhrase = '';
+            for (let len = sonParams.length, i = 0; i < len; i++) {
+                sPhrase += 'this.' + sonParams[i] + '=' + sonParams[i] + ';';
+            }
+
+            let Son = new Function(params, fPhrase + sPhrase);
+            Object.defineProperty(Son, 'name', {
+                value: sonClsName
+            });
+            // let tmp = new fatherCls();
+            function tmp() {};
+            tmp.prototype = fatherCls.prototype;
+            Son.prototype = new tmp();
+            Son.prototype.constructor = Son;
+            // Object.defineProperty(Son.prototype.constructor, 'name', {value: sonClsName});
+            return Son;
+        }
+
+
+        function inheritClass1(fatherCls, sonClsName, params) {
+            //
+            //fatherCls: class, parent class.
+            //sonClsName: string, name of son class.
+            //params: list, list of parameters of parent and son class, parameters are all string.
+            //eg, let D = inheritClass(A, 'D', ['model', 'color', 'size']);
+            //D is the son class which extends parent class - A.
+            //A is the parent class.
+            //'D' is the name of son class, must equal variable D which will be assigned to.
+            //'model' is the parameter inherit from parent class, should be in the front of list.
+            //'color', 'size' are new parameters of son class, should be at end.
+
+            let fatherParams = params.slice(0, fatherCls.length);
+            let sonParams = params.slice(fatherCls.length);
+
+            let Son = function () {
+                let params = Array.prototype.slice.call(arguments);
+                fatherCls.apply(this, params.slice(0, fatherParams.length));
+                for (let len = sonParams.length, i = 0; i < len; i++) {
+                    this[sonParams[i]] = params[i + fatherParams.length];
+                }
+            }
+
+            Object.defineProperty(Son, 'length', {
+                value: params.length
+            })
+            Object.defineProperty(Son, 'name', {
+                value: sonClsName
+            });
+
+            function tmp() {};
+            tmp.prototype = fatherCls.prototype;
+            Son.prototype = new tmp();
+            Son.prototype.constructor = Son;
+
+            return Son;
+        }
+
+        function inheritClass2(fatherCls, sonClsName, sonParams) {
+            //
+            //fatherCls: class, parent class.
+            //sonClsName: string, name of son class.
+            //params: list, list of parameters of son class, parameters are all string.
+            //eg, let D = inheritClass2(A, 'D', ['color', 'size']).
+            //D is the son class which extends parent class - A.
+            //A is the parent class.
+            //'D' is the name of son class, must equal variable D which will be assigned to.
+            //'color', 'size' are new parameters of son class, should be at end.
+            //usage of D, let d = new D('Aparam', 'red', 'big'), the 'Aparam' is parameter of A class.
+
+
+            let Son = function () {
+                let params = Array.prototype.slice.call(arguments);
+                fatherCls.apply(this, params.slice(0, fatherCls.length));
+                for (let len = sonParams.length, i = 0; i < len; i++) {
+                    this[sonParams[i]] = params[i + fatherCls.length];
+                }
+            }
+
+            Object.defineProperty(Son, 'length', {
+                value: fatherCls.length + sonParams.length
+            });
+
+            Object.defineProperty(Son, 'name', {
+                value: sonClsName
+            });
+
+            function tmp() {};
+            tmp.prototype = fatherCls.prototype;
+            Son.prototype = new tmp();
+            Son.prototype.constructor = Son;
+
+            return Son;
+        }
+
+
+
+
+
+        let D = inheritClass(A, 'D', ['model', 'color', 'size']);
+        D.prototype.getColor = function () {
+            return this.color;
+        }
+        D.prototype.getSize = function () {
+            return this.size;
+        }
+        let dd = new D('D_model', 'dark', 'DLL');
+        console.log(dd.getModel());
+
+        let E = inheritClass(D, 'E', ['model', 'color', 'size', 'patten']);
+        E.prototype.getPatten = function () {
+            return this.patten;
+        }
+        let ee = new E('E_model', 'green', 'EX', 'flower');
+        for (k in ee) {
+            if (ee.hasOwnProperty(k)) {
+                console.log(ee[k]);
+            }
+        }
+
+        let F = inheritClass(E, 'F', ['model', 'color', 'size', 'patten', 'price']);
+        F.prototype.getPrice = function () {
+            return this.price;
+        }
+        let ff = new F('F_model', 'blue', 'FX', 'flower', 21.0);
+        console.log(ff);
+
+
+
+        let F1 = inheritClass1(E, 'F1', ['model', 'color', 'size', 'patten', 'price']);
+        F1.prototype.getPrice = function () {
+            return this.price;
+        }
+        let ff1 = new F1('F1_model', 'blue', 'FX', 'flower', 21.0);
+        console.log(ff1);
+
+
+        let F2 = inheritClass2(E, 'F2', ['price']);
+        F2.prototype.getPrice = function () {
+            return this.price;
+        }
+        let ff2 = new F2('F2_model', 'blue', 'FX', 'flower', 21.0);
+        console.dir(ff2);
+    </script>
+</body>
+
+</html>

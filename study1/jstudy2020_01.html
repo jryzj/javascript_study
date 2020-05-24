@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <link href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+    <style>
+        .input-box {
+            position: relative;
+            width: 300px;
+            /* background-color: orange; */
+        }
+        .input-box input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            font-size: 16px;
+        }
+        .input-box i {
+            position: absolute;
+            top: 2px;
+            right: -20px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class='outer'>
+        <ul>
+            <li id = '1st-li'>this is list inner *1</li>
+            <li id = '2nd-li'>this is list inner *2</li>
+            <li>this is list inner *3</li>
+            <li>this is list inner *4</li>
+        </ul>
+    </div>
+    <div >
+        <button id='btn-time'>click me</button>
+        <p id='time'> time is </p>
+    </div>
+    <div class="input-box">
+        <i class="fa fa-eye-slash"></i>
+        <input type="password" id="pwd" >
+    </div>
+    <div class="attr" attr=2>
+        <p>attr is not 1. </p>
+    </div>
+    
+</body>
+<script>
+    let li = document.getElementById('2nd-li');  //get element by id
+    console.log('by id, ', li);
+    let ul = document.getElementsByTagName('ul'); //get elements by tag
+    console.log('by tag, ', ul);
+    let cls = document.getElementsByClassName('outer'); //get elements by class name
+    console.log('by class, ', cls);
+    let qs = document.querySelector('li');  //get first element by selector
+    console.log('by query selecetor, ', qs);
+    let qss = document.querySelectorAll('li'); //get all elements by selector
+    console.log('by query selectors, ', qss);    
+
+    console.log('this is body, ', document.body);  //get body tag
+
+    console.log('this is html, ', document.documentElement); // get html tag
+
+    li.onclick = function(){
+        alert("yes, it's me!");
+    }
+
+    let btnTime = document.querySelector("#btn-time");
+    btnTime.onclick = function(){
+        let pTime = document.querySelector("#time");
+        pTime.innerHTML ='<strong>' + Date() + '</strong>';
+    }
+
+    let ipt = document.getElementById('pwd');
+    let eye = document.getElementsByClassName('fa-eye-slash')[0];
+
+    let visibleFlag = 0;
+
+    eye.onclick = function() {
+        if (visibleFlag) {
+            ipt.type = 'password';
+            ipt.style.color = 'black';
+            visibleFlag = 0;
+            clsName = this.className;
+            this.className = clsName.replace('fa-eye', 'fa-eye-slash');        
+            console.log(clsName);
+            // this.className = 'fa fa-eye-slash';
+        }else {
+            ipt.type = 'text';
+            ipt.style.color = 'red';
+            visibleFlag = 1;
+            clsName = this.className;
+            this.className = clsName.replace('fa-eye-slash', 'fa-eye');
+            console.log(clsName);
+            // this.className = 'fa fa-eye';
+        }
+
+    }
+
+    let attr = document.getElementsByClassName("attr")[0];
+    if (attr.getAttribute("attr") == 1){
+        attr.firstElementChild.innerHTML = "attr is 1.";
+    }
+
+</script>
+</html>

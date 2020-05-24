@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>min:<input name='min' value=0></p>
+<p>sec:<input name='sec' value=0></p>
+
+
+<script>
+/*
+    Person.prototype={
+        height:100
+    }
+    function Person(){
+        this.eat=function(){
+            this.height ++; //this.height（1）=this.height（2）+1, （1）就是在this(子类）增加一个height的属性，（2）从父类中取出height的值。
+        }
+    }
+
+    var person = new Person();
+    var person1 = new Person();
+*/
+
+/*var person1 = {
+    name: 'cyl',
+    sex: 'male'
+};
+
+var person2 = Object.create(person1); //创建person2，__proto__是person1*/
+
+
+
+/*
+var a = 5;
+function test(){
+    a=0;
+    alert(a);
+    alert(this.a);
+    var a;
+    alert(a);
+}
+
+test(); //0   5   0
+new test();//0   undefined   0*/
+
+
+
+'use strict';
+var minNode=document.getElementsByName('min')[0];
+var secNode=document.getElementsByName('sec')[0];
+var min=0,
+    sec=0;
+
+var timer=setInterval(function(){
+    sec++;
+    if(sec==60){
+        min++;
+        sec=0;
+    }
+    minNode.value=min;
+    secNode.value=sec;
+    if(min==3)
+    {
+        clearInterval(timer);
+    }
+},100);
+
+
+</script>
+
+
+</body>
+</html>

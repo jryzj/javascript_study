@@ -1,0 +1,465 @@
+@import "reset.css";
+body {
+  background-color: #fff;
+}
+nav {
+  min-width: 1200px;
+  height: 36px;
+  background-color: #f9f9f9;
+}
+a:visited {
+  color: #aaa;
+}
+a:hover {
+  color: red;
+}
+input {
+  outline-style: none;
+}
+.core {
+  width: 1200px;
+  margin: 0px auto;
+}
+.toblock {
+  display: block;
+}
+.block-hidden {
+  display: block;
+  overflow: hidden;
+}
+.iblock {
+  display: inline-block;
+}
+.mr24 {
+  margin-right: 24px;
+}
+.mr34 {
+  margin-right: 34px;
+}
+.p10 {
+  padding: 10px;
+}
+.p20 {
+  padding: 20px;
+}
+.pt20 {
+  padding-top: 20px;
+}
+.ptl20 {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+.bb1 {
+  border-bottom: 1px solid #aaa;
+}
+.lh0 {
+  line-height: 0px;
+}
+.lh18 {
+  line-height: 18px;
+}
+.lh74 {
+  line-height: 74px;
+}
+.fz12 {
+  font-size: 12px;
+}
+.w-min-80 {
+  min-width: 80px;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clear-fix:after,
+.clear-fix:before {
+  content: "";
+  display: table;
+  clear: both;
+}
+.margin-center {
+  margin: 0 auto;
+}
+.ta-center {
+  text-align: center;
+}
+.ta-left {
+  text-align: left;
+}
+.valign-top {
+  vertical-align: top;
+}
+.valign-middle {
+  vertical-align: middle;
+}
+.bgc-pink {
+  background-color: pink;
+}
+.bgc-skyblue {
+  background-color: #90d2ff;
+}
+.bgc-white {
+  background-color: #fff;
+}
+.clr-white {
+  color: white;
+}
+.clr-gray {
+  color: gray;
+}
+.clr-aaa {
+  color: #aaa;
+}
+.dn {
+  display: none;
+}
+.img-size-90 {
+  width: 90px;
+  height: 90px;
+}
+.cross-bar {
+  position: relative;
+  width: 1920px;
+  left: 50%;
+  margin-left: -960px;
+}
+.menu {
+  /*   height: 36px; */
+  line-height: 36px;
+  color: #aaa;
+  font-size: 12px;
+}
+.menu-sub {
+  padding: 0px 8px;
+  font-size: 12px;
+  position: relative;
+}
+.menu li:first-child .menu-sub {
+  padding-left: 0px;
+}
+.menu li:last-child .menu-sub {
+  padding-right: 0px;
+}
+.menu li::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 10px;
+  background-color: #aaa;
+}
+.menu li:first-child:before {
+  display: none;
+}
+.menu-dropdown {
+  /*   background-color: green; */
+  position: relative;
+}
+.menu-dropdown:hover .dropdown-menu {
+  display: block;
+}
+.icon {
+  /*     display: inline-block; */
+  background: url(https://res8.vmallres.com/20191020/images/echannel/icon/icon-common.svg);
+}
+.icon-dropdown {
+  width: 14px;
+  height: 14px;
+  background-position-x: -71px;
+  background-position-y: 3px;
+}
+.icon-home {
+  width: 50px;
+  height: 50px;
+  background-position-x: -202px;
+  background-position-y: 0px;
+}
+.icon-android {
+  width: 30px;
+  height: 30px;
+  background-position-x: 0px;
+  background-position-y: 0px;
+}
+.icon-ios {
+  width: 30px;
+  height: 30px;
+  background-position-x: -38px;
+  background-position-y: -113px;
+}
+.icon-wechat {
+  width: 30px;
+  height: 30px;
+  background-position-x: -32px;
+  background-position-y: 0px;
+}
+.icon-cart {
+  width: 14px;
+  height: 14px;
+  background-position-x: -104px;
+  background-position-y: 0px;
+}
+.icon-bigcart {
+  width: 100px;
+  height: 100px;
+  background-position-x: -262px;
+  background-position-y: 0px;
+}
+.icon-search {
+  width: 14px;
+  height: 14px;
+  background-position-x: -144px;
+  background-position-y: 0px;
+}
+.menu-dropdown:hover .icon-dropdown {
+  background-position-x: -85px;
+  background-position-y: 3px;
+}
+.menu-dropdown:hover .icon-cart {
+  background-position-x: -124px;
+  background-position-y: 0px;
+}
+.dropdown-menu {
+  font-size: 12px;
+  text-align: center;
+  background-color: white;
+  position: absolute;
+  right: 0px;
+  white-space: nowrap;
+  padding: 0 18px;
+  border-radius: 0px 0px 8px 8px;
+  display: none;
+  z-index: 10;
+}
+.menu .dropdown-li a {
+  display: inline-block;
+}
+.menu .dropdown-li::before {
+  content: "";
+  width: 0px;
+  height: 0px;
+}
+.logo-size {
+  width: 205px;
+  height: 36px;
+}
+.capsule-btn {
+  display: inline-block;
+  line-height: 24px;
+  padding: 1px 8px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+.capsule-btn:hover {
+  opacity: 0.7;
+}
+.topbar .capsule-btn {
+  color: white;
+}
+.search {
+  position: relative;
+}
+.search-bar {
+  line-height: 30px;
+  margin-top: 23px;
+}
+.search-input {
+  line-height: 30px;
+  width: 325px;
+  border-width: 1px 0px 1px 1px;
+  border-style: solid;
+  border-color: white;
+  border-radius: 15px;
+  padding: 0px 40px 0px 15px;
+  background-color: #eee;
+}
+.search-submit {
+  width: 20px;
+  height: 20px;
+}
+.search-input:hover {
+  border-color: #ddd;
+}
+.icon-search {
+  content: "";
+  width: 20px;
+  height: 18px;
+  background: url(https://res8.vmallres.com/20191020/images/echannel/icon/icon-common.svg);
+  background-position-x: -158px;
+  background-position-y: 0px;
+  position: absolute;
+  top: 30px;
+  right: 13px;
+  z-index: 999;
+  cursor: pointer;
+}
+.search-bar-hot {
+  line-height: 30px;
+  position: absolute;
+  right: 45px;
+  font-size: 12px;
+  color: #aaa;
+}
+.search-bar .dropdown-menu {
+  top: 65px;
+  left: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+  box-shadow: 0px -1px 5px #eeee;
+  z-index: 5;
+}
+.search-bar .dropdown-menu dd,
+dt {
+  padding: 0px 10px;
+}
+.search-bar .dropdown-menu dd:hover {
+  background-color: #eee;
+}
+input[name=search-input]:focus ~ .dropdown-menu {
+  display: block;
+}
+.slider {
+  height: 550px;
+  position: relative;
+}
+.slider li img {
+  left: 50%;
+  margin-left: -960px;
+  position: relative;
+}
+.slider-index {
+  position: absolute;
+  top: 500px;
+  right: 100px;
+}
+.slider-index li {
+  width: 10px;
+  height: 10px;
+  border: 1px solid white;
+  border-radius: 50%;
+  margin-left: 20px;
+}
+.slider-index li:hover {
+  background-color: white;
+}
+.menu-slider {
+  width: 200px;
+  position: absolute;
+  top: 80px;
+  left: 10%;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  padding: 0px;
+}
+.menu-slider:hover {
+  border-radius: 10px 0px 0px 10px;
+}
+.menu-slider-item {
+  padding: 0px 20px;
+  height: 74px;
+}
+.menu-slider-item:hover {
+  background-color: white;
+}
+.menu-slider-item:first-child:hover {
+  border-radius: 10px 0px 0px 0px;
+}
+.menu-slider-item:last-child:hover {
+  border-radius: 0px 0px 0px 10px;
+}
+.menu-slider-item:hover ~ .menu-slider-list {
+  display: block;
+}
+.menu-slider-item dl {
+  padding: 10px 0px;
+  border-bottom: 1px solid #eee;
+}
+.menu-slider-item dt {
+  line-height: 24px;
+  padding: 2px 0px;
+}
+.menu-slider-item dt a {
+  color: gray;
+}
+.menu-slider-item dd {
+  line-height: 24px;
+}
+.menu-slider-item dd a {
+  font-size: 14px;
+}
+.menu-slider-list {
+  width: 408px;
+  top: 0px;
+  left: 200px;
+  border-radius: 0px 10px 10px 0px;
+  position: absolute;
+  padding: 32px 20px;
+  background-color: white;
+}
+.menu-slider-list:hover {
+  display: block;
+}
+.menu-slider-list dl {
+  width: 204px;
+  float: left;
+}
+.menu-slider-list dl dd {
+  height: 80px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 0px 10px;
+}
+.menu-slider-list dl dd:last-child {
+  margin-bottom: 0px;
+}
+.menu-slider-list dl dd:hover {
+  background-color: #eee;
+}
+.menu-slider-list dl dd a {
+  line-height: 80px;
+}
+.menu-slider-list dl dd a img {
+  width: 56px;
+  height: 56px;
+}
+.btn-slider-left {
+  width: 56px;
+  height: 56px;
+  top: 250px;
+  left: 30%;
+  position: absolute;
+  background: url(https://res8.vmallres.com/20191126/images/echannel/icon/icon01.svg);
+  /*   background-color: #fff; */
+  background-position-x: -12px;
+  background-position-y: 68px;
+}
+.btn-slider-left:hover {
+  background: url(https://res8.vmallres.com/20191126/images/echannel/icon/icon01.svg);
+  background-position-x: -252px;
+  background-position-y: 68px;
+}
+.btn-slider-right {
+  width: 56px;
+  height: 56px;
+  top: 250px;
+  right: 50px;
+  position: absolute;
+  background: url(https://res8.vmallres.com/20191126/images/echannel/icon/icon01.svg);
+  /*   background-color: #fff; */
+  background-position-x: -92px;
+  background-position-y: 68px;
+}
+.btn-slider-right:hover {
+  background: url(https://res8.vmallres.com/20191126/images/echannel/icon/icon01.svg);
+  background-position-x: -172px;
+  background-position-y: 68px;
+}
+.test {
+  background-color: skyblue;
+}
+.test1 {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}

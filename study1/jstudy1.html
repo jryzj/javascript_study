@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>javascript study</title>
+</head>
+
+<body>
+
+    <h2 id='s1'>
+        javascript study from webstorm.</h2>
+
+
+
+    <div id="list">
+        <p id="java">Java</p>
+        <p id="haskell">Haskell</p>
+        <p id="python">Python</p>
+        <p id="scheme">Scheme</p>
+    </div>
+
+
+    <div>
+        <form onsubmit="return delang()">
+            <p>删除哪项？</p>
+            <input type="text" id="delangg"></input>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+
+
+    <div id="image" style="border:2px solid #0af;padding:10px">
+        <form method="post" action="http://local/test" enctype="multipart/form-data">
+            <input type="file" id="image_file">
+        </form>
+        <div id="image_show"
+            style="width:400px;height:200px;border:2px solid #0aa;background-repeat:no-repeat;background-position: center;background-image:none">
+            <img id="image_show1" src="1.png" width="400px">
+        </div>
+        <div><span>file information: </span><span id="image_info"></span></div>
+    </div>
+
+    <script type="text/javascript" src="study1-4.js"></script>
+
+</body>
+
+</html>

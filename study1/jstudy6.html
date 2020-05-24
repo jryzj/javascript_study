@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>javascript study 6</title>
+</head>
+<body>
+<script>
+    function numberToHanzi(n) {
+        var hanzi = '',
+            digital;
+        n = parseInt(n);
+        while (n >= 1) {
+            digital = n % 10;
+            switch (digital) {
+                case 1:
+                    hanzi = hanzi + '一';
+                    break;
+                case 2:
+                    hanzi = hanzi + '二';
+                    break;
+                case 3:
+                    hanzi = hanzi + '三';
+                    break;
+                case 4:
+                    hanzi = hanzi + '四';
+                    break;
+                case 5:
+                    hanzi = hanzi + '五';
+                    break;
+                case 6:
+                    hanzi = hanzi + '六';
+                    break;
+                case 7:
+                    hanzi = hanzi + '七';
+                    break;
+                case 8:
+                    hanzi = hanzi + '八';
+                    break;
+                case 9:
+                    hanzi = hanzi + '九';
+                    break;
+                case 0:
+                    hanzi = hanzi + '零';
+                    break;
+            }
+            n = parseInt(n / 10);
+        }
+        return hanzi;
+    }
+
+    document.write(numberToHanzi(prompt('input a number :')));
+</script>
+
+</body>
+</html>

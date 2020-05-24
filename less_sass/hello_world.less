@@ -1,0 +1,22 @@
+@color-red: #f00;
+@color-green: green;
+
+.container {
+    height: 50px;
+    color: @color-green;
+    background: @color-red;
+}
+
+h2 {
+    &:extend(.style);
+    font-style: italic;
+  }
+  
+  h2 {
+    background-color: red;
+  }
+  
+  .style {
+    // background: green;
+    background: #fff;
+  }

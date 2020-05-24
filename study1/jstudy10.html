@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax study 2</title>
+</head>
+<body>
+<p>this is a user content.</p>
+<p id="user"></p>
+<br>
+<p>these are users content.</p>
+<p id="users"></p>
+<br>
+<button id="getuser">a user</button>
+<button id="getusers">users</button>
+<script type="text/javascript">
+    var btn1 = document.getElementById("getuser"),
+        btn2 = document.getElementById("getusers"),
+        puser = document.getElementById("user"),
+        pusers = document.getElementById("users");
+
+    btn1.addEventListener("click",showUser,false);
+    btn2.addEventListener("click",showUser,false);
+
+    function showUser(e)
+    {
+        var xhr;
+        console.log(e);
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest();
+        }
+        else
+        {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(e.target.id=="getuser"){
+            xhr.open("get", "json_user.txt", true);
+            xhr.onload=function () {
+                if(xhr.status==200){
+                    var juser = JSON.parse(xhr.responseText);
+                    puser.innerText=juser.id+">>>"+juser.name+">>>>"+juser.email;
+                }
+            }
+            xhr.send();
+        }
+
+        if(e.target.id=="getusers"){
+            xhr.open("get", "json_users.txt", true);
+            xhr.onload=function () {
+                if(xhr.status==200){
+                    var juser = JSON.parse(xhr.responseText);
+                    for (var i in juser){
+                        pusers.innerText=pusers.innerText+"\n"+juser[i].id+">>>"+juser[i].name+">>>>"+juser[i].email;
+                    }
+                }
+            }
+            xhr.send();
+        }
+    }
+
+
+</script>
+</body>
+</html>

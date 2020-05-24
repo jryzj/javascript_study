@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d615d053-b32a-4cdf-8945-714152d44a88" name="默认的" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../.vscode/launch.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../845338511-58bd1331a55aa.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/ajax1.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/ajax2.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/ajax3.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/ajax4.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/ajax5.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/process.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/sample.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/user.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/users.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/users.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/jstudy17.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/jstudy18.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/jstudy19.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/ajax1.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/ajax_mysql_get.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/ajax_mysql_post.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/helloworld.php" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/json_user.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/json_users.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy10.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy11.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy12.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy13.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy14.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy3.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy5.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy6.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy7.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy8.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/jstudy9.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../study1/starwar1.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy/jstudy20.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy/vue_study.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy/vuestudy.css" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/.babelrc" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/.editorconfig" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/.gitignore" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/.postcssrc.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/README.md" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/build.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/check-versions.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/logo.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/utils.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/vue-loader.conf.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/webpack.base.conf.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/webpack.dev.conf.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/build/webpack.prod.conf.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/config/dev.env.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/config/index.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/config/prod.env.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/index.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/package-lock.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/package.json" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/App.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/assets/Clone old.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/assets/Darth Vader.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/assets/logo.png" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/components/HelloWorld.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/components/zjvuestudy1.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/components/zjvuestudy2.vue" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/src/main.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/startup.bat" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/vuestudy2/static/.gitkeep" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/组件映射关系图.eddx" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/../../vuestudy/组件映射关系图.jpg" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="450" />
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/jstudy19.html" />
+        <option value="$PROJECT_DIR$/jstudy18.html" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="980" />
+    <option name="height" value="1044" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="javascript.nodejs.core.library.configured.version" value="8.11.1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../mock" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d615d053-b32a-4cdf-8945-714152d44a88" name="默认的" comment="" />
+      <created>1527784021960</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1527784021960</updated>
+      <workItem from="1527784023872" duration="153000" />
+      <workItem from="1527784183083" duration="6200000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="6353000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-11" y="-11" width="1942" height="1056" extended-state="6" />
+    <layout>
+      <window_info id="Project" active="false" anchor="top" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15828878" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="top" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24919786" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/jstudy19.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="e#1990#1997#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jstudy18.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="64" column="22" lean-forward="true" selection-start-line="64" selection-start-column="22" selection-end-line="64" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#14;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../ajaxsandbox/ajaxsandbox/ajax1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-495">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jstudy19.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding>
+            <element signature="e#1990#1997#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

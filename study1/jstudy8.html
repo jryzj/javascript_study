@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jstudy8</title>
+</head>
+<body>
+<div style="position: relative;width:300px;height:500px;border:1px solid;">
+<div class='circle'style="position:absolute;left:30%;bottom:0px;width:100px;height:100px;background: red;border-radius: 50%"></div>
+</div>
+<script>
+    'use strict';
+    const MIN_SIZE=30,
+        MAX_SIZE=100,
+        SPEED_FACT=5,
+        SMOOTH_FACT=100,
+        BOUNCE_FACT=5,
+        PRESS_FACT=3;
+    var timer, currentSize=MAX_SIZE, isDance=0;
+    var power,
+        speed,
+        currentPostion,
+        maxPostion;
+    var circle = document.getElementsByClassName('circle')[0];
+    circle.onmousedown=function () {
+            timer=setInterval(function() {
+                if ( !isDance && currentSize>= MIN_SIZE) {
+                circle.style.height = currentSize - PRESS_FACT + 'px';
+                currentSize=parseInt(window.getComputedStyle(circle, null).height);
+            }
+        },SMOOTH_FACT);
+    }
+
+    circle.onmouseup=function(){
+        isDance=1;
+        clearInterval(timer);
+/*        var power,
+            speed,
+            currentPostion,
+            maxPostion;*/
+        power = Math.ceil(MAX_SIZE / currentSize);
+        maxPostion = (power-1) * MAX_SIZE;
+        timer=setInterval(function () {
+            currentSize=parseInt(window.getComputedStyle(circle, null).height);
+            currentPostion=parseInt(window.getComputedStyle(circle, null).bottom);
+            if ( currentSize < MAX_SIZE) {
+                circle.style.height = currentSize + BOUNCE_FACT + 'px';
+            }
+            if ( currentPostion < maxPostion){
+                speed = Math.ceil((maxPostion - currentPostion) / SPEED_FACT);
+                circle.style.bottom=currentPostion+speed+'px';
+            }
+            else{
+                clearInterval(timer);
+                console.log('finish!');
+            }
+        },SMOOTH_FACT);
+
+    }
+
+
+
+</script>
+
+</body>
+</html>

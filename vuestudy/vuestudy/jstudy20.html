@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>vue study 1</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <!--   &lt;!&ndash; 开发环境版本，包含了用帮助的命令行警告 &ndash;&gt;
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+        *{
+            margin:15px;
+            font-family: 微软雅黑;
+        }
+
+        #canvas1{
+            width:400px;
+            height:120px;
+            border:1px solid;
+        }
+
+        table{
+            background: #888888;
+        }
+        th, td{
+            background: paleturquoise;
+            text-align: center;
+            padding: 5px 10px;
+        }
+
+    </style>
+    <link rel="stylesheet" href="vuestudy.css">
+</head>
+<body>
+<div id="vueapp-one">
+    <p>{{name}} is {{age}}</p>
+    <p>{{hello("jerry")}}</p>
+    <hr>
+    <p>Name:<input type="text" v-bind:value="name"></p>
+    <p>Note:<input type="text" v-model="note">--<input type="number" v-model="nthLetter"></p>
+    {{ note | upperCase(nthLetter) }}
+    <hr>
+    <!--<a v-bind:href="bing_link">BING</a>-->
+    <!--<a  @click.prevent="" v-bind:href="bing_link">BING</a>-->
+    <a  @click.prevent="" v-bind:href="bing_link">BING</a> //阻止事件处理行动
+    <br>
+    <p v-html="HTML"></p>
+    <br>
+    <p v-bind:style="CSS">CSS</p>
+
+    <!--<button v-on:click="add(1)">add age</button>-->
+    <button v-on:click.once="add(1)">add age</button>
+    <button @click="sub">sub age</button>
+
+
+    <div id="canvas1" @mousemove="updateXY(event)">
+        <p>mouseX: {{mouseX}}</p>
+        <p>mouseY: {{mouseY}}</p>
+        <span @mousemove.stop="">STOP DISPLAY</span>
+    </div>
+    <p v-if="mouseX%2==0">X number is even</p>
+    <p v-else-if="mouseY%2==0">Y number is even</p>
+    <br>
+    <div>
+        <label >姓名</label>
+        <input ref="refName" type="text" @keyup="telName">
+        <p>{{refName}}</p>
+        <label >城市</label>
+        <input type="text" v-model="refCity">
+        <p>{{refCity}}</p>
+    </div>
+    <div>
+        <span title="click here" v-bind:class="{vuegreen:vuegreenTag}" v-on:click="vuegreenTag=!vuegreenTag">vuegreen</span>
+    </div>
+    <div>
+<!--        <ul>
+            <li v-for="i in team1">{{i}}</li>
+        </ul>   -->
+        <ul>
+            <li v-for="i in team1" v-key="team1.index">{{i}} <input type="text"></li>  // 增加vue属性key,来刷新input的排序
+        </ul>
+        <button v-on:click="reverse(team1)">倒序</button>
+        <fieldset>
+            <legend for="">增加队员</legend>
+            <input id="addone" type="text">
+            <button v-on:click="addTeam(team1,'addone')">增加</button>
+        </fieldset>
+
+    </div>
+<!--    <template v-for="(i,index) in team2">
+    <label>{{index}}</label>
+    <p v-for="(value,key) in i">
+        <span>{{key}}-{{value}}</span>
+    </p>
+</template>-->
+
+    <template>
+        <table  cellspacing="2">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+            <tr v-for="(i,index) in team2">
+                <td>{{index}}</td>
+                <td v-for="(value,key) in i">{{value}}</td>
+            </tr>
+        </table>
+
+<!--        <label>{{index}}</label>
+        <p v-for="(value,key) in i">
+            <span>{{key}}-{{value}}</span>
+        </p>-->
+    </template>
+</div>
+<div id="vueapp-two">
+    <hr>
+    <p>{{footerTime}} by  {{getName}}</p>
+    <button @click="updateDate()">update date</button>
+    <hello></hello>
+</div>
+
+
+<script src="vue_study.js"></script>
+</body>
+</html>

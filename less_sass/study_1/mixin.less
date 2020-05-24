@@ -1,0 +1,40 @@
+.mgn(@trbl, @px:0) {
+    .mr when (@trbl = right) {
+        margin-right: @px;
+    }
+
+    .ml when (@trbl = left) {
+        margin-left: @px;
+    }
+
+    .mt when (@trbl = top) {
+        margin-top: @px;
+    }
+
+    .mb when (@trbl = bottom) {
+        margin-bottom: @px;
+    }
+
+    .mrla when (@trbl = rla) {
+        margin: auto @px; 
+    }
+
+    .mtba when (@trbl = tba) {
+        margin: @px auto; 
+    }
+
+    .mrl when (@trbl = rl) {
+        margin-right: @px; 
+        margin-left: @px;
+    }
+
+    .mtb when (@trbl = tb) {
+        margin-top: @px; 
+        margin-bottom: @px;
+    }
+
+    .mtrbl when (@trbl = trbl) {
+        margin: @px; 
+    }
+
+}

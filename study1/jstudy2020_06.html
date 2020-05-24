@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .ipt {
+            width: 200px;
+            margin: auto;
+            margin-top: 10px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid skyblue;
+            text-align: center;
+        }
+
+        .ipt-lvl {
+            width: 20px;
+        }
+
+        .ipt-label {
+            margin-left: 20px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .btn-pre {
+            margin-left: 20px;
+            border: none;
+            border-radius: 2px;
+        }
+
+        .map {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .obj {
+            margin: 5px;
+            padding: 5px;
+            background-color: lightgreen;
+            border: 2px solid white;
+            border-radius: 2px;
+        }
+
+        .fl {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div><span class='ipt-label'>TargetName:</span>
+            <input class="ipt ipt-tgt">
+            <span class='ipt-label'>Level:</span>
+            <input class="ipt ipt-lvl" type="text" oninput="this.value = this.value.replace(/[^123]|[123]{2,}/,'');"
+                value="2">
+                <button class = 'btn-pre'><</button>
+            </div>
+
+        <div class="map">
+            <!-- <div class="obj fl">ddd</div> -->
+            <!-- <div class="obj fl">ddd</div> -->
+        </div>
+    </div>
+    <script>
+        function findObj(root, rootStr, obj) {
+            let attr = Object.getOwnPropertyNames(root);
+            if (attr.length) {
+                if (attr.indexOf(obj) != -1) {
+                    return rootStr + '.' + obj;
+                } else {
+                    for (let len = attr.length, i = 0; i <= len; i++) {
+                        let rtn = findObj(root[attr[i]], attr[i], obj);
+                        if (rtn) {
+                            return rootStr + '.' + rtn;
+                        }
+                    }
+                }
+            } else {
+                return -1;
+            }
+        }
+        let propertySum = 0;
+        let maxNum = 100000;
+        let maxLevel = 3;
+
+        function appDiv(container, content) {
+            let tDiv = document.createElement('div');
+            tDiv.classList.toggle('obj');
+            tDiv.classList.toggle('fl');
+            tDiv.innerHTML = content + '<br>';
+            container.appendChild(tDiv);
+            return tDiv;
+        }
+
+        function showAllAttr(container, root, level, rootStr) {
+            if (level > 0) {
+                level--;
+                let attr = '',
+                    len = 0;
+                // console.log(root);
+                switch (typeof root) {
+                    case 'string':
+                    case 'number':
+                    case 'boolean':
+                    case 'undefined':
+                        appDiv(container, rootStr + ' : ' + root);
+                        break;
+                    case 'function':
+                        attr = Object.getOwnPropertyNames(root);
+                        len = attr.length;
+                        for (let i = 0; i < len; i++) {
+                            appDiv(container, rootStr + '.' + attr[i] + ' : ' + typeof root);
+                        }
+                        break;
+                    case 'object': {
+                        switch (root) {
+                            case null:
+                                appDiv(container, rootStr + '.null : null');
+                                break;
+                            default:
+                                attr = Object.getOwnPropertyNames(root);
+                                len = attr.length;
+                                if (len == 0) {
+                                    appDiv(container, rootStr + ' : ' + typeof root);
+                                } else {
+                                    for (let i = 0; i < len; i++) {
+                                        let tDiv = appDiv(container, rootStr + '.' + attr[i] + ' : ' + typeof root);
+                                        // if (attr[i] == 'Object') {
+                                        //     console.log('Object::', root[attr[i]]);
+                                        // }
+                                        if (propertySum < maxNum) {
+                                            propertySum++;
+                                            console.log({
+                                                propertySum
+                                            });
+                                            showAllAttr(tDiv, root[attr[i]], level, rootStr + '.' + attr[i]);
+                                        }
+                                    }
+                                }
+
+                        }
+
+
+                    }
+                    break;
+                }
+            }
+        }
+
+
+
+        window.addEventListener('DOMContentLoaded', function () {
+            let iptTgt = document.querySelector('.ipt-tgt');
+            let iptLvl = document.querySelector('.ipt-lvl');
+            let currentDiv = document.querySelector('.map');
+            let btnPre = document.querySelector('.btn-pre');
+            let level = iptLvl.value <= 3 ? iptLvl.value : 3;
+
+            iptTgt.addEventListener('blur', function () {
+                propertySum = 0;
+                let objName = this.value.split('.');
+                obj = window;
+                for (let len = objName.length, i = 0; i < len; i++) {
+                    obj = obj[objName[i]];
+                }
+                if (obj != undefined) {
+                    currentDiv.innerHTML = '';
+                    showAllAttr(currentDiv, obj, level, this.value);
+                } else {
+                    currentDiv.innerHTML = '';
+                    showAllAttr(currentDiv, 'undefined', level, '');
+                }
+
+            });
+
+            currentDiv.addEventListener('click', function (e) {
+                let newTarget = e.target.firstChild.textContent.split(' : ')[0];
+                console.log(newTarget);
+                iptTgt.focus();
+                iptTgt.value = newTarget;
+                iptTgt.blur();
+            });
+
+            btnPre.addEventListener('click', function (e) {
+                let newTarget = iptTgt.value.slice(0,iptTgt.value.lastIndexOf('.'));
+                console.log(newTarget);
+                iptTgt.focus();
+                iptTgt.value = newTarget;
+                iptTgt.blur();
+            });
+
+        })
+    </script>
+</body>
+
+</html>

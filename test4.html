@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>my_study_test4</title>
+</head>
+<body>
+<h1>Canvas</h1>
+<canvas id="myCanvas" width="500" height="400" style="border:2px solid #aaaaaa;">
+</canvas>
+
+<script>
+var ca=document.getElementById("myCanvas");
+var ctx=ca.getContext("2d");
+ctx.fillStyle="#ff9944";
+ctx.fillRect(5,5,100,100);
+ctx.beginPath();
+ctx.arc(70,70,40,0,2*Math.PI);
+ctx.stroke();
+ctx.font="30px Arial";
+ctx.fillText("Hello",120,50);
+ctx.strokeText("World",130,30);
+</script>
+<br/>
+
+<form action="http://www.bing.com" method="get">
+<h1>select</h1>
+<input list="list" name="search">
+<datalist id="list">
+<option value="first">
+<option value="second">
+<option value="third">
+</datalist>
+<input type="submit">
+</form>
+
+	
+</body>
+</html>
